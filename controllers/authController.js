@@ -4,7 +4,7 @@ import JWT from 'jsonwebtoken';
 
 export const registerController = async (req, res) => {
     try {
-        const { name, email, password, phone, address } = req.body
+        const { name, email, password, phone, address } = req.body      //destructeuring
         // validation
         if (!name) {
             return res.send({ error: "Name is required" })
@@ -23,7 +23,7 @@ export const registerController = async (req, res) => {
         }
 
         // check user
-        const existinguser = await userModel.findOne({ email: email })
+        const existinguser = await userModel.findOne({ email: email })     //it will also work if we only write one email
 
         // existing user
         if (existinguser) {
@@ -106,4 +106,10 @@ export const loginController = async (req, res) => {
             error
         })
     }
+}
+
+// test controller
+export const testController = (req, res) => {
+    // console.log('protected route')
+    res.send("protected route")
 }
