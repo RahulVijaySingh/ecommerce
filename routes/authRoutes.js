@@ -10,6 +10,6 @@ router.post('/register', registerController);
 // login route 
 router.post('/login', loginController);
 
-router.get('/test', requireSignIn, isAdmin, testController)     //requireSignIn is mmiddele ware       //token based ke liye aise krte hai routing
+router.get('/test', requireSignIn, isAdmin, testController)     //requireSignIn isAdmin is mmiddele ware       //token based ke liye aise krte hai routing
 
 export default router
