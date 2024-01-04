@@ -23,6 +23,7 @@ const Layout = ({ children, title, description, keywords, author }) => {
                 <Toaster
                     position="top-right"
                     reverseOrder={false}
+
                 />
                 {children}
 
