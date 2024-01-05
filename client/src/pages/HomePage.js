@@ -8,6 +8,7 @@ const HomePage = () => {
         <Layout title={'Best  Offers'}>
             <h1>HomePage</h1>
 
+
         </Layout>
     );
 };
