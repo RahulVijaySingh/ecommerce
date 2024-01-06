@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import Layout from "../../components/Layout/Layout";
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-import toast from 'react-hot-toast';
-import '../../styles/AuthStyles.css'
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
+import "../../styles/AuthStyles.css";
 
 const Register = () => {
     const [name, setName] = useState("");
@@ -11,6 +11,7 @@ const Register = () => {
     const [password, setPassword] = useState("");
     const [phone, setPhone] = useState("");
     const [address, setAddress] = useState("");
+    const [answer, setAnswer] = useState("");
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
@@ -18,16 +19,15 @@ const Register = () => {
         try {
             const res = await axios.post(
                 `${process.env.REACT_APP_API}/api/v1/auth/register`,
-                { name, email, password, phone, address }
+                { name, email, password, phone, address, answer }
             );
             if (res && res.data.success) {
                 // toast.success(res.data && res.data.message, { duration: 5000 });
                 toast.success(res.data && res.data.message);
 
                 navigate("/login");
-            }
-            else {
-                toast.error(res.data.message, { duration: 4000 })
+            } else {
+                toast.error(res.data.message, { duration: 4000 });
             }
         } catch (error) {
             console.log(error);
@@ -95,6 +95,17 @@ const Register = () => {
                             className="form-control"
                             id="exampleInputEmail1"
                             placeholder="Enter Your Address"
+                            required
+                        />
+                    </div>
+                    <div className="mb-3">
+                        <input
+                            type="text"
+                            value={answer}
+                            onChange={(e) => setAnswer(e.target.value)}
+                            className="form-control"
+                            id="exampleInputEmail1"
+                            placeholder="what is your favourite sports"
                             required
                         />
                     </div>

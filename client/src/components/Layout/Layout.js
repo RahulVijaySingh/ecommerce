@@ -21,8 +21,8 @@ const Layout = ({ children, title, description, keywords, author }) => {
             <Header />
             <main style={{ minHeight: '70vh' }}>
                 <Toaster
-                    position="top-right"
-                    reverseOrder={false}
+                // position="top-right"
+                // reverseOrder={false}
 
                 />
                 {children}
