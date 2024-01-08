@@ -1,22 +1,33 @@
-import express from 'express'
-import { registerController, loginController, testController, forgotPasswordController } from '../controllers/authController.js';
-import { isAdmin, requireSignIn } from '../middlewares/authMidddleware.js';
+import express from "express";
+import {
+    registerController,
+    loginController,
+    testController,
+    forgotPasswordController,
+} from "../controllers/authController.js";
+import { isAdmin, requireSignIn } from "../middlewares/authMidddleware.js";
 
 const router = express.Router();
 
 // regestration route
-router.post('/register', registerController);
+router.post("/register", registerController);
 
-// login route 
-router.post('/login', loginController);
+// login route
+router.post("/login", loginController);
 
 // forgot password  ||  POSTT
-router.post('/forgot-password', forgotPasswordController)
+router.post("/forgot-password", forgotPasswordController);
 
+router.get("/test", requireSignIn, isAdmin, testController); //requireSignIn isAdmin is mmiddele ware       //token based ke liye aise krte hai routing
 
-router.get('/test', requireSignIn, isAdmin, testController)     //requireSignIn isAdmin is mmiddele ware       //token based ke liye aise krte hai routing
-router.get('/user-auth', requireSignIn, (req, res) => {
-    res.status(200).send({ ok: true })
-})
+// protected user route auth
+router.get("/user-auth", requireSignIn, (req, res) => {
+    res.status(200).send({ ok: true });
+});
 
-export default router
+// protected admin route auth
+router.get("/admin-auth", requireSignIn, isAdmin, (req, res) => {
+    res.status(200).send({ ok: true });
+});
+
+export default router;
