@@ -1,11 +1,13 @@
 import express from "express";
 import {
-    registerController,
-    loginController,
-    testController,
-    forgotPasswordController,
+  registerController,
+  loginController,
+  testController,
+  forgotPasswordController,
+  updateProfileController,
 } from "../controllers/authController.js";
 import { isAdmin, requireSignIn } from "../middlewares/authMiddleware.js";
+import { updateProductController } from "../controllers/productController.js";
 
 const router = express.Router();
 
@@ -22,12 +24,14 @@ router.get("/test", requireSignIn, isAdmin, testController); //requireSignIn isA
 
 // protected user route auth
 router.get("/user-auth", requireSignIn, (req, res) => {
-    res.status(200).send({ ok: true });
+  res.status(200).send({ ok: true });
 });
 
 // protected admin route auth
 router.get("/admin-auth", requireSignIn, isAdmin, (req, res) => {
-    res.status(200).send({ ok: true });
+  res.status(200).send({ ok: true });
 });
+
+router.put("/profile", requireSignIn, updateProfileController);
 
 export default router;
